@@ -181,7 +181,9 @@ class Ui_DatabaseHandler(object):
         self.Summary.clear()
         self.Summary.append(item[4])
 
-    def setupUi(self, DatabaseHandler):
+    def setupUi(self, DatabaseHandler,RF = 1):
+        self.RF = RF
+
         shift = 50
         DatabaseHandler.setObjectName("DatabaseHandler")
         DatabaseHandler.resize(1100, 700)
@@ -293,6 +295,9 @@ class Ui_DatabaseHandler(object):
 
         self.retranslateUi(DatabaseHandler)
         QtCore.QMetaObject.connectSlotsByName(DatabaseHandler)
+        if self.RF == 1: #intial refresh
+            self.refresh()
+            self.RF = 0
 
     def retranslateUi(self, DatabaseHandler):
         _translate = QtCore.QCoreApplication.translate
