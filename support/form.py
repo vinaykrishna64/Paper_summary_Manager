@@ -108,7 +108,8 @@ class Ui_Addform(object):
         self.sub_or_edit = sub_or_edit
         self.INobj = INobj
         Addform.setObjectName("Addform")
-        Addform.resize(640, 480)
+        scale = 1.5
+        Addform.resize(round(640*scale), round(480*scale))
         font = QtGui.QFont()
         font.setFamily("Comic Sans MS")
         font.setPointSize(10)
