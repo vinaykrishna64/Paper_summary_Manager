@@ -55,8 +55,16 @@ class Ui_DatabaseHandler(object):
         c = conn.cursor()
         c.execute("SELECT * FROM Papers ORDER BY year ASC")
         items = c.fetchall()
+        i = 1
         for item in items:
-            self.tableView.addItem(item[2])
+            ITEM = QtWidgets.QListWidgetItem(item[2])
+
+            if i == 2:
+                ITEM.setBackground(QtGui.QColor('aquamarine'))
+                i = i -2
+            i = i+1
+            self.tableView.addItem(ITEM)
+
 
             
     def addform(self):
@@ -129,8 +137,14 @@ class Ui_DatabaseHandler(object):
         if lab or field or cfd or review:
             c.execute("SELECT * FROM Papers WHERE lab = :l and field = :f and cfd = :c and review = :r  ORDER BY year ASC",{'l':lab , 'f':field,'c':cfd,'r':review})
             items = c.fetchall()
+        i = 1
         for item in items:
-            self.tableView.addItem(item[2])
+            ITEM = QtWidgets.QListWidgetItem(item[2])
+            if i == 2:
+                ITEM.setBackground(QtGui.QColor('aquamarine'))
+                i = i -2
+            i = i+1
+            self.tableView.addItem(ITEM)
         
     def del_warning(self,title_paper):
         msg = QMessageBox()
@@ -183,10 +197,10 @@ class Ui_DatabaseHandler(object):
 
     def setupUi(self, DatabaseHandler,RF = 1):
         self.RF = RF
-
+        scale = 1.5
         shift = 50
         DatabaseHandler.setObjectName("DatabaseHandler")
-        DatabaseHandler.resize(1100, 700)
+        DatabaseHandler.resize( round(1100*scale),  round(700*scale))
         font = QtGui.QFont()
         font.setFamily("Comic Sans MS")
         font.setPointSize(10)
@@ -197,53 +211,55 @@ class Ui_DatabaseHandler(object):
         self.centralwidget = QtWidgets.QWidget(DatabaseHandler)
         self.centralwidget.setObjectName("centralwidget")
         self.Filter = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.filter())
-        self.Filter.setGeometry(QtCore.QRect(250, 110+shift, 101, 41))
+        self.Filter.setGeometry(QtCore.QRect( round(250*scale),  round((110+shift)*scale),  round(101*scale),  round(41*scale)))
         self.Filter.setObjectName("Filter")
         self.CFD = QtWidgets.QCheckBox(self.centralwidget)
-        self.CFD.setGeometry(QtCore.QRect(240, 60+shift, 81, 31))
+        self.CFD.setGeometry(QtCore.QRect( round(240*scale),  round((60+shift)*scale),  round(81*scale),  round(31*scale)))
         self.CFD.setObjectName("CFD")
         self.Lab = QtWidgets.QCheckBox(self.centralwidget)
-        self.Lab.setGeometry(QtCore.QRect(240, 10+shift, 81, 31))
+        self.Lab.setGeometry(QtCore.QRect( round(240*scale),  round((10+shift)*scale),  round(81*scale),  round(31*scale)))
         self.Lab.setObjectName("Lab")
         self.Field = QtWidgets.QCheckBox(self.centralwidget)
-        self.Field.setGeometry(QtCore.QRect(20, 110+shift, 101, 41))
+        self.Field.setGeometry(QtCore.QRect( round(20*scale),  round((110+shift)*scale),  round(101*scale), round(41*scale)))
         self.Field.setObjectName("Field")
         self.Review = QtWidgets.QCheckBox(self.centralwidget)
-        self.Review.setGeometry(QtCore.QRect(140, 110+shift, 101, 41))
+        self.Review.setGeometry(QtCore.QRect( round(140*scale),  round((110+shift)*scale),  round(101*scale),  round(41*scale)))
         self.Review.setObjectName("Review")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(9, 9+shift, 71, 21))
+        self.label.setGeometry(QtCore.QRect( round(9*scale),  round((9+shift)*scale),  round(71*scale),  round(21*scale)))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(110, 10+shift, 61, 21))
+        self.label_2.setGeometry(QtCore.QRect( round(110*scale),  round((10+shift)*scale),  round(61*scale),  round(21*scale)))
         self.label_2.setObjectName("label_2")
         self.Tags = QtWidgets.QTextBrowser(self.centralwidget)
-        self.Tags.setGeometry(QtCore.QRect(390, 40+shift, 691, 131))
+        self.Tags.setGeometry(QtCore.QRect( round(390*scale),  round((40+shift)*scale),  round(691*scale),  round(131*scale)))
         self.Tags.setObjectName("Tags")
         self.tableView = QtWidgets.QListWidget(self.centralwidget)
-        self.tableView.setGeometry(QtCore.QRect(10, 180+shift, 481, 431))
+        self.tableView.setGeometry(QtCore.QRect( round(10*scale),  round((180+shift)*scale),  round(481*scale),  round(431*scale)))
+ 
+
         self.tableView.setObjectName("tableView")
         self.Summary = QtWidgets.QTextBrowser(self.centralwidget)
-        self.Summary.setGeometry(QtCore.QRect(500, 240+shift, 571, 371))
+        self.Summary.setGeometry(QtCore.QRect( round(500*scale),  round((240+shift)*scale),  round(571*scale),  round(371*scale)))
         self.Summary.setObjectName("Summary")
         self.FROM = QtWidgets.QSpinBox(self.centralwidget)
-        self.FROM.setGeometry(QtCore.QRect(10, 60+shift, 91, 31))
+        self.FROM.setGeometry(QtCore.QRect( round(10*scale),  round((60+shift)*scale),  round(91*scale),  round(31*scale)))
         self.FROM.setMinimum(0)
         self.FROM.setMaximum(2020)
         self.FROM.setSingleStep(1)
         self.FROM.setProperty("value", 1970)
         self.FROM.setObjectName("FROM")
         self.TO = QtWidgets.QSpinBox(self.centralwidget)
-        self.TO.setGeometry(QtCore.QRect(130, 60+shift, 81, 31))
+        self.TO.setGeometry(QtCore.QRect( round(130*scale),  round((60+shift)*scale),  round(81*scale),  round(31*scale)))
         self.TO.setMinimum(1950)
         self.TO.setMaximum(2050)
         self.TO.setProperty("value", 2021)
         self.TO.setObjectName("TO")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(730, 180+shift, 161, 31))
+        self.label_3.setGeometry(QtCore.QRect( round(730*scale),  round((180+shift)*scale),  round(161*scale), round(31*scale)))
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(650, 0+shift, 161, 31))
+        self.label_4.setGeometry(QtCore.QRect( round(650*scale),  round((0+shift)*scale),  round(161*scale),  round(31*scale)))
         self.label_4.setObjectName("label_4")
         DatabaseHandler.setCentralWidget(self.centralwidget)
         font = QtGui.QFont()
